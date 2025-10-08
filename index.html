@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Skin Care Product Classification Dashboard</title>
+    <title>Dynamic Skin Care Product Classification Dashboard</title>
     
     <!-- External Libraries -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
@@ -20,12 +20,241 @@
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: #333;
             line-height: 1.6;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Decorative Side Elements */
+        body::before,
+        body::after {
+            content: '';
+            position: fixed;
+            width: 300px;
+            height: 100%;
+            top: 0;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        body::before {
+            left: 0;
+            background: linear-gradient(90deg, rgba(102, 126, 234, 0.3) 0%, transparent 100%);
+        }
+
+        body::after {
+            right: 0;
+            background: linear-gradient(-90deg, rgba(118, 75, 162, 0.3) 0%, transparent 100%);
+        }
+
+        /* Floating Decorative Elements */
+        .floating-decoration {
+            position: fixed;
+            pointer-events: none;
+            opacity: 0.15;
+            z-index: 0;
+        }
+
+        .floating-decoration.left {
+            left: 50px;
+        }
+
+        .floating-decoration.right {
+            right: 50px;
+        }
+
+        .floating-bubble {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.2));
+            animation: floatUpDown 6s ease-in-out infinite;
+        }
+
+        .floating-bubble:nth-child(1) {
+            width: 80px;
+            height: 80px;
+            top: 10%;
+            animation-delay: 0s;
+        }
+
+        .floating-bubble:nth-child(2) {
+            width: 120px;
+            height: 120px;
+            top: 30%;
+            animation-delay: 2s;
+        }
+
+        .floating-bubble:nth-child(3) {
+            width: 60px;
+            height: 60px;
+            top: 50%;
+            animation-delay: 1s;
+        }
+
+        .floating-bubble:nth-child(4) {
+            width: 100px;
+            height: 100px;
+            top: 70%;
+            animation-delay: 3s;
+        }
+
+        .floating-bubble:nth-child(5) {
+            width: 70px;
+            height: 70px;
+            top: 85%;
+            animation-delay: 1.5s;
+        }
+
+        @keyframes floatUpDown {
+            0%, 100% {
+                transform: translateY(0px) translateX(0px) scale(1);
+            }
+            25% {
+                transform: translateY(-20px) translateX(10px) scale(1.05);
+            }
+            50% {
+                transform: translateY(-40px) translateX(-10px) scale(0.95);
+            }
+            75% {
+                transform: translateY(-20px) translateX(10px) scale(1.02);
+            }
+        }
+
+        /* Geometric Pattern Overlay */
+        .geometric-pattern {
+            position: fixed;
+            width: 250px;
+            height: 100%;
+            top: 0;
+            pointer-events: none;
+            opacity: 0.08;
+            z-index: 0;
+        }
+
+        .geometric-pattern.left {
+            left: 0;
+            background: 
+                linear-gradient(45deg, transparent 48%, rgba(255,255,255,0.5) 49%, rgba(255,255,255,0.5) 51%, transparent 52%),
+                linear-gradient(-45deg, transparent 48%, rgba(255,255,255,0.5) 49%, rgba(255,255,255,0.5) 51%, transparent 52%);
+            background-size: 40px 40px;
+            animation: patternMove 20s linear infinite;
+        }
+
+        .geometric-pattern.right {
+            right: 0;
+            background: 
+                repeating-linear-gradient(0deg, transparent, transparent 35px, rgba(255,255,255,0.5) 35px, rgba(255,255,255,0.5) 37px),
+                repeating-linear-gradient(90deg, transparent, transparent 35px, rgba(255,255,255,0.5) 35px, rgba(255,255,255,0.5) 37px);
+            background-size: 40px 40px;
+            animation: patternMove 20s linear infinite reverse;
+        }
+
+        @keyframes patternMove {
+            0% {
+                background-position: 0 0;
+            }
+            100% {
+                background-position: 40px 40px;
+            }
+        }
+
+        /* Skincare Icons Floating */
+        .skincare-icon {
+            position: absolute;
+            font-size: 3rem;
+            opacity: 0.2;
+            animation: rotateFloat 15s ease-in-out infinite;
+        }
+
+        .skincare-icon:nth-child(odd) {
+            animation-direction: reverse;
+        }
+
+        /* Glowing Orbs */
+        .glow-orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.15;
+            pointer-events: none;
+            z-index: 0;
+            animation: pulseGlow 8s ease-in-out infinite;
+        }
+
+        .glow-orb.left-top {
+            width: 400px;
+            height: 400px;
+            top: -100px;
+            left: -100px;
+            background: radial-gradient(circle, rgba(102, 126, 234, 0.6), transparent);
+        }
+
+        .glow-orb.left-bottom {
+            width: 350px;
+            height: 350px;
+            bottom: -80px;
+            left: -80px;
+            background: radial-gradient(circle, rgba(118, 75, 162, 0.5), transparent);
+            animation-delay: 2s;
+        }
+
+        .glow-orb.right-top {
+            width: 380px;
+            height: 380px;
+            top: -90px;
+            right: -90px;
+            background: radial-gradient(circle, rgba(118, 75, 162, 0.6), transparent);
+            animation-delay: 1s;
+        }
+
+        .glow-orb.right-bottom {
+            width: 360px;
+            height: 360px;
+            bottom: -70px;
+            right: -70px;
+            background: radial-gradient(circle, rgba(102, 126, 234, 0.5), transparent);
+            animation-delay: 3s;
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 0.15;
+            }
+            50% {
+                transform: scale(1.1);
+                opacity: 0.25;
+            }
+        }
+
+        @keyframes rotateFloat {
+            0%, 100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+            25% {
+                transform: translateY(-30px) rotate(5deg);
+            }
+            50% {
+                transform: translateY(-60px) rotate(0deg);
+            }
+            75% {
+                transform: translateY(-30px) rotate(-5deg);
+            }
+        }
+
+        /* Responsive adjustments for side decorations */
+        @media (max-width: 1400px) {
+            .floating-decoration,
+            .geometric-pattern {
+                display: none;
+            }
         }
 
         .dashboard-container {
             max-width: 1600px;
             margin: 0 auto;
             padding: 20px;
+            position: relative;
+            z-index: 1;
         }
 
         .header {
@@ -208,9 +437,11 @@
         }
 
         .tab-button.active {
-            background: rgba(102, 126, 234, 0.1);
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.2), rgba(118, 75, 162, 0.2));
             color: #667eea;
             border-bottom-color: #667eea;
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
         }
 
         .tab-content {
@@ -302,10 +533,114 @@
             z-index: 10;
             white-space: nowrap;
             border-right: 1px solid rgba(255,255,255,0.2);
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .data-table th:hover {
+            background: linear-gradient(45deg, #5a67d8, #6b3f9e);
         }
 
         .data-table th:last-child {
             border-right: none;
+        }
+
+        .filter-icon {
+            margin-left: 8px;
+            font-size: 0.9rem;
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+        }
+
+        .data-table th:hover .filter-icon {
+            opacity: 1;
+        }
+
+        .column-filter {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            border: 2px solid #667eea;
+            border-radius: 8px;
+            padding: 10px;
+            min-width: 200px;
+            max-height: 300px;
+            overflow-y: auto;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            margin-top: 5px;
+        }
+
+        .column-filter.active {
+            display: block;
+        }
+
+        .filter-option {
+            padding: 8px 12px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background 0.2s ease;
+            color: #333;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .filter-option:hover {
+            background: rgba(102, 126, 234, 0.1);
+        }
+
+        .filter-option input[type="checkbox"] {
+            cursor: pointer;
+        }
+
+        .filter-search {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+
+        .filter-actions {
+            display: flex;
+            gap: 8px;
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid #eee;
+        }
+
+        .filter-btn {
+            flex: 1;
+            padding: 6px 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+
+        .filter-btn.apply {
+            background: #667eea;
+            color: white;
+        }
+
+        .filter-btn.apply:hover {
+            background: #5a67d8;
+        }
+
+        .filter-btn.clear {
+            background: #f1f3f4;
+            color: #666;
+        }
+
+        .filter-btn.clear:hover {
+            background: #e9ecef;
         }
 
         .data-table td {
@@ -327,79 +662,6 @@
 
         .data-table tbody tr:nth-child(even) {
             background: rgba(248, 249, 250, 0.5);
-        }
-
-        .column-filter {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .column-filter input {
-            width: 100px;
-            padding: 4px 8px;
-            border: 1px solid rgba(255,255,255,0.3);
-            border-radius: 4px;
-            font-size: 0.8rem;
-            background: rgba(255,255,255,0.2);
-            color: white;
-        }
-
-        .column-filter input::placeholder {
-            color: rgba(255,255,255,0.7);
-        }
-
-        .ppt-section {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            border-radius: 15px;
-            padding: 30px;
-            color: white;
-            margin-top: 20px;
-        }
-
-        .ppt-viewer {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            padding: 20px;
-            margin: 20px 0;
-            min-height: 400px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            border: 2px dashed rgba(255, 255, 255, 0.3);
-        }
-
-        .ppt-placeholder {
-            text-align: center;
-            color: rgba(255, 255, 255, 0.8);
-        }
-
-        .ppt-controls {
-            display: flex;
-            gap: 10px;
-            margin-top: 20px;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        .ppt-btn {
-            background: rgba(255, 255, 255, 0.2);
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            color: white;
-            padding: 10px 20px;
-            border-radius: 25px;
-            font-size: 0.9rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-block;
-        }
-
-        .ppt-btn:hover {
-            background: rgba(255, 255, 255, 0.3);
-            transform: translateY(-2px);
-            color: white;
         }
 
         .export-btn {
@@ -466,6 +728,113 @@
             margin-bottom: 15px;
         }
 
+        /* VBA Tools Specific Styles */
+        .vba-tools-container {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 15px;
+            padding: 30px;
+            color: white;
+            margin-top: 20px;
+        }
+
+        .tool-section {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 25px;
+            margin: 20px 0;
+            backdrop-filter: blur(10px);
+        }
+
+        .tool-form {
+            display: grid;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .form-input, .form-textarea {
+            padding: 12px 15px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-input:focus, .form-textarea:focus {
+            border-color: rgba(255, 255, 255, 0.7);
+        }
+
+        .form-input::placeholder, .form-textarea::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .form-textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .tool-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .tool-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+            color: white;
+        }
+
+        .result-display {
+            background: rgba(255, 255, 255, 0.95);
+            color: #333;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 15px;
+            min-height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 500;
+            text-align: center;
+            position: relative;
+        }
+
+        .char-counter {
+            text-align: right;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+
+        .two-column-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
         /* Mobile Responsiveness */
         @media (max-width: 768px) {
             .dashboard-container {
@@ -511,6 +880,10 @@
             .icon-item {
                 padding: 10px;
             }
+
+            .two-column-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
         /* Scrollbar Styling */
@@ -532,16 +905,86 @@
         .table-container::-webkit-scrollbar-thumb:hover {
             background: #5a67d8;
         }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 25px;
+            border-radius: 25px;
+            z-index: 1000;
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            animation: slideIn 0.3s ease;
+        }
+
+        .notification.success {
+            background: #28a745;
+            color: white;
+        }
+
+        .notification.warning {
+            background: #ffc107;
+            color: #333;
+        }
+
+        .notification.error {
+            background: #dc3545;
+            color: white;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
     </style>
 </head>
 <body>
+    <!-- Glowing Orbs for depth -->
+    <div class="glow-orb left-top"></div>
+    <div class="glow-orb left-bottom"></div>
+    <div class="glow-orb right-top"></div>
+    <div class="glow-orb right-bottom"></div>
+
+    <!-- Geometric Patterns -->
+    <div class="geometric-pattern left"></div>
+    <div class="geometric-pattern right"></div>
+
+    <!-- Left Side Floating Decorations -->
+    <div class="floating-decoration left">
+        <div class="floating-bubble"></div>
+        <div class="floating-bubble"></div>
+        <div class="floating-bubble"></div>
+        <div class="floating-bubble"></div>
+        <div class="floating-bubble"></div>
+        
+        <div class="skincare-icon" style="top: 15%; left: 30px;">🧴</div>
+        <div class="skincare-icon" style="top: 40%; left: 60px;">💧</div>
+        <div class="skincare-icon" style="top: 65%; left: 40px;">✨</div>
+        <div class="skincare-icon" style="top: 85%; left: 70px;">🌿</div>
+    </div>
+
+    <!-- Right Side Floating Decorations -->
+    <div class="floating-decoration right">
+        <div class="floating-bubble"></div>
+        <div class="floating-bubble"></div>
+        <div class="floating-bubble"></div>
+        <div class="floating-bubble"></div>
+        <div class="floating-bubble"></div>
+        
+        <div class="skincare-icon" style="top: 20%; right: 40px;">🧪</div>
+        <div class="skincare-icon" style="top: 45%; right: 70px;">💎</div>
+        <div class="skincare-icon" style="top: 70%; right: 50px;">🌸</div>
+        <div class="skincare-icon" style="top: 90%; right: 65px;">🍃</div>
+    </div>
+
     <div class="dashboard-container">
         <!-- Header Section -->
         <div class="header">
             <div class="header-content">
-                <h1>🧴 Skin Care Product Classification Dashboard</h1>
-                <p class="subtitle">Comprehensive Product Data Analysis & Training Resource</p>
-                <p style="color: #95a5a6; font-size: 0.9rem;">Created by Tamilarasan R • Professional Data Management System</p>
+                <h1>🧴 Dynamic Skin Care Classification Dashboard</h1>
+                <p class="subtitle">Comprehensive Product Data Analysis & VBA Tools Integration</p>
+                <p style="color: #95a5a6; font-size: 0.9rem;">Created by Tamilarasan R • Advanced Data Management System</p>
                 
                 <div class="professional-icons">
                     <div class="icon-item">
@@ -550,15 +993,15 @@
                     </div>
                     <div class="icon-item">
                         <div class="emoji">📊</div>
-                        <div class="label">Data Management</div>
+                        <div class="label">Dynamic Data</div>
                     </div>
                     <div class="icon-item">
-                        <div class="emoji">🎓</div>
-                        <div class="label">Training Materials</div>
+                        <div class="emoji">🛠️</div>
+                        <div class="label">VBA Tools</div>
                     </div>
                     <div class="icon-item">
-                        <div class="emoji">✨</div>
-                        <div class="label">Quality Standards</div>
+                        <div class="emoji">⚡</div>
+                        <div class="label">Auto-Generated</div>
                     </div>
                 </div>
             </div>
@@ -567,237 +1010,332 @@
         <!-- Overview Stats -->
         <div class="stats-overview">
             <div class="stat-card">
-                <div class="stat-number" id="totalSheets">9</div>
+                <div class="stat-number" id="totalSheets">0</div>
                 <div class="stat-label">Data Sheets</div>
             </div>
             <div class="stat-card">
-                <div class="stat-number" id="totalCCN">797</div>
-                <div class="stat-label">Consumer Names</div>
+                <div class="stat-number" id="totalRows">0</div>
+                <div class="stat-label">Total Data Rows</div>
             </div>
             <div class="stat-card">
-                <div class="stat-number" id="totalGuidelines">98</div>
-                <div class="stat-label">KP Guidelines</div>
+                <div class="stat-number" id="totalColumns">0</div>
+                <div class="stat-label">Total Columns</div>
             </div>
             <div class="stat-card">
-                <div class="stat-number" id="totalChars">33</div>
-                <div class="stat-label">Key Characteristics</div>
+                <div class="stat-number" id="toolsAvailable">2</div>
+                <div class="stat-label">VBA Tools</div>
             </div>
+        </div>
+
+        <!-- Auto-load Status -->
+        <div class="card" id="loadingCard" style="margin-bottom: 30px; text-align: center;">
+            <div class="card-title">⚡ Auto-Loading Excel Data from GitHub Repository</div>
+            <div id="loadingStatus" class="loading-spinner" style="margin: 20px auto;"></div>
+            <p id="loadingText" style="margin-top: 10px; color: #666; font-size: 0.9rem;">Loading Excel file from repository...</p>
         </div>
 
         <!-- Tab Container -->
         <div class="tab-container">
-            <div class="tab-navigation">
-                <button class="tab-button active" onclick="showTab('agenda')">📋 Agenda</button>
-                <button class="tab-button" onclick="showTab('definition')">📖 Definition</button>
-                <button class="tab-button" onclick="showTab('characteristics')">🔍 Characteristics</button>
-                <button class="tab-button" onclick="showTab('keyChars')">⭐ Key Chars</button>
-                <button class="tab-button" onclick="showTab('guidelines')">📋 KP Guidelines</button>
-                <button class="tab-button" onclick="showTab('ccn')">🏷️ CCN Database</button>
-                <button class="tab-button" onclick="showTab('impc')">🔢 IMPC</button>
-                <button class="tab-button" onclick="showTab('updates')">🔄 Updates</button>
-                <button class="tab-button" onclick="showTab('training')">🎓 Training</button>
+            <div class="tab-navigation" id="tabNavigation">
+                <button class="tab-button active" data-tab="welcome" onclick="showTab('welcome')">🏠 Welcome</button>
+                <button class="tab-button" data-tab="vba-tools" onclick="showTab('vba-tools')">🛠️ VBA Tools</button>
             </div>
 
-            <div class="tab-content">
-                <!-- Agenda Tab -->
-                <div id="agenda" class="tab-pane active">
-                    <h2>📋 Document Agenda & Overview</h2>
+            <div class="tab-content" id="tabContent">
+                <!-- Welcome Tab -->
+                <div id="welcome" class="tab-pane active">
+                    <h2>🏠 Welcome to Dynamic Skin Care Dashboard</h2>
                     <div class="responsive-grid">
                         <div class="card">
-                            <div class="card-title">📊 Dashboard Features</div>
+                            <div class="card-title">🚀 Getting Started</div>
+                            <p style="color: #666; margin-bottom: 15px;">The dashboard automatically loads Excel data from GitHub repository and generates tabs for each sheet.</p>
                             <ul style="margin-left: 20px; color: #666;">
-                                <li>✅ Interactive scrollable data tables</li>
-                                <li>✅ Column-wise filtering system</li>
-                                <li>✅ Advanced search functionality</li>
-                                <li>✅ Mobile-responsive design</li>
-                                <li>✅ Excel data export capability</li>
-                                <li>✅ PowerPoint presentation viewer</li>
+                                <li>✅ Automatically detects all sheets</li>
+                                <li>✅ Creates interactive data tables</li>
+                                <li>✅ Provides search and filter functionality</li>
+                                <li>✅ Includes VBA tools for text processing</li>
                             </ul>
+                            <div style="margin-top: 20px;">
+                                <button class="vba-tools-button" style="background: #667eea; color: white; border: none; padding: 12px 24px; border-radius: 25px; font-size: 1rem; cursor: pointer; font-weight: 600;">
+                                    🛠️ Try VBA Tools Now
+                                </button>
+                            </div>
                         </div>
                         <div class="card">
-                            <div class="card-title">🎯 Data Sections</div>
+                            <div class="card-title">🛠️ VBA Tools Available</div>
                             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 15px;">
-                                <div style="padding: 8px; background: #f8f9fa; border-radius: 5px; text-align: center;">
-                                    <strong>📖 Definitions</strong><br><small>Product classifications</small>
+                                <div style="padding: 15px; background: #f8f9fa; border-radius: 8px; text-align: center;">
+                                    <div style="font-size: 1.5rem; margin-bottom: 8px;">✂️</div>
+                                    <strong>Value Abbreviator</strong><br><small>Shorten text to 60 chars</small>
                                 </div>
-                                <div style="padding: 8px; background: #f8f9fa; border-radius: 5px; text-align: center;">
-                                    <strong>🏷️ CCN Database</strong><br><small>Consumer names</small>
-                                </div>
-                                <div style="padding: 8px; background: #f8f9fa; border-radius: 5px; text-align: center;">
-                                    <strong>📋 Guidelines</strong><br><small>KP instructions</small>
-                                </div>
-                                <div style="padding: 8px; background: #f8f9fa; border-radius: 5px; text-align: center;">
-                                    <strong>⭐ Characteristics</strong><br><small>Product features</small>
+                                <div style="padding: 15px; background: #f8f9fa; border-radius: 8px; text-align: center;">
+                                    <div style="font-size: 1.5rem; margin-bottom: 8px;">🏷️</div>
+                                    <strong>Brand Abbreviator</strong><br><small>Format brand names</small>
                                 </div>
                             </div>
                         </div>
                         <div class="card">
-                            <div class="card-title">🔄 How to Use</div>
-                            <p style="color: #666; margin-bottom: 15px;">Navigate through tabs to access different data sections. Use search and filters for quick data retrieval.</p>
-                            <div style="background: #e3f2fd; padding: 15px; border-radius: 8px; border-left: 4px solid #2196f3;">
-                                <strong>💡 Tip:</strong> All tables are fully scrollable and filterable. Click column headers to sort data.
+                            <div class="card-title">📊 Data Loading Status</div>
+                            <div id="dataLoadStatus" style="color: #666; margin-bottom: 15px;">Loading data from GitHub repository...</div>
+                            <div style="display: flex; gap: 10px; flex-wrap: wrap;" id="quickAccessButtons">
+                                <!-- Quick access buttons will be added here after data loads -->
                             </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Definition Tab -->
-                <div id="definition" class="tab-pane">
-                    <h2>📖 Product Definitions</h2>
-                    <div class="table-controls">
-                        <input type="text" class="search-input" id="definitionSearch" placeholder="🔍 Search definitions, commodities, or examples...">
-                        <button class="export-btn" onclick="exportToExcel('definition')">📥 Export Excel</button>
-                    </div>
-                    <div class="table-wrapper">
-                        <div class="table-container" id="definitionTableContainer">
-                            <div id="definitionTable"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Characteristics Tab -->
-                <div id="characteristics" class="tab-pane">
-                    <h2>🔍 Product Characteristics Matrix</h2>
-                    <div class="table-controls">
-                        <input type="text" class="search-input" id="charSearch" placeholder="🔍 Search characteristics...">
-                        <button class="export-btn" onclick="exportToExcel('characteristics')">📥 Export Excel</button>
-                    </div>
-                    <div class="table-wrapper">
-                        <div class="table-container" id="characteristicsTableContainer">
-                            <div id="characteristicsTable"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Key Characteristics Tab -->
-                <div id="keyChars" class="tab-pane">
-                    <h2>⭐ Key Characteristics by Product Cluster</h2>
-                    <div class="table-controls">
-                        <input type="text" class="search-input" id="keyCharSearch" placeholder="🔍 Search clusters or characteristics...">
-                        <button class="export-btn" onclick="exportToExcel('keyChars')">📥 Export Excel</button>
-                    </div>
-                    <div class="table-wrapper">
-                        <div class="table-container" id="keyCharsTableContainer">
-                            <div id="keyCharsTable"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- KP Guidelines Tab -->
-                <div id="guidelines" class="tab-pane">
-                    <h2>📋 Knowledge Processing Guidelines</h2>
-                    <div class="table-controls">
-                        <input type="text" class="search-input" id="guidelinesSearch" placeholder="🔍 Search guidelines, clusters, or characteristics...">
-                        <select class="filter-select" id="clusterFilter">
-                            <option value="">All Clusters</option>
-                        </select>
-                        <button class="export-btn" onclick="exportToExcel('guidelines')">📥 Export Excel</button>
-                    </div>
-                    <div class="table-wrapper">
-                        <div class="table-container" id="guidelinesTableContainer">
-                            <div id="guidelinesTable"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- CCN Database Tab -->
-                <div id="ccn" class="tab-pane">
-                    <h2>🏷️ Common Consumer Names Database</h2>
-                    <div class="table-controls">
-                        <input type="text" class="search-input" id="ccnSearch" placeholder="🔍 Search consumer names or commodity groups...">
-                        <select class="filter-select" id="commodityFilter">
-                            <option value="">All Commodity Groups</option>
-                        </select>
-                        <button class="export-btn" onclick="exportToExcel('ccn')">📥 Export Excel</button>
-                    </div>
-                    <div class="table-wrapper">
-                        <div class="table-container" id="ccnTableContainer">
-                            <div id="ccnTable"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- IMPC Tab -->
-                <div id="impc" class="tab-pane">
-                    <h2>🔢 Important Product Codes</h2>
-                    <div class="table-controls">
-                        <input type="text" class="search-input" id="impcSearch" placeholder="🔍 Search IMPC codes, forms, or applications...">
-                        <button class="export-btn" onclick="exportToExcel('impc')">📥 Export Excel</button>
-                    </div>
-                    <div class="table-wrapper">
-                        <div class="table-container" id="impcTableContainer">
-                            <div id="impcTable"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Updates Tab -->
-                <div id="updates" class="tab-pane">
-                    <h2>🔄 General Updates & Answers</h2>
-                    <div class="table-controls">
-                        <input type="text" class="search-input" id="updatesSearch" placeholder="🔍 Search updates and answers...">
-                        <button class="export-btn" onclick="exportToExcel('updates')">📥 Export Excel</button>
-                    </div>
-                    <div class="table-wrapper">
-                        <div class="table-container" id="updatesTableContainer">
-                            <div id="updatesTable"></div>
                         </div>
                     </div>
                 </div>
 
                 <!-- Training Tab -->
                 <div id="training" class="tab-pane">
-                    <h2>🎓 Training Materials & Presentation</h2>
-                    <div class="ppt-section">
-                        <h3>📊 Skin Care Training Document</h3>
-                        <p style="margin-bottom: 20px;">Interactive presentation viewer for comprehensive training materials</p>
+                    <h2 style="margin-bottom: 25px;">🎓 Training Materials & Presentation</h2>
+                    
+                    <div style="background: white; border-radius: 15px; padding: 30px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);">
+                        <div style="text-align: center; margin-bottom: 25px;">
+                            <h3 style="color: #2c3e50; margin-bottom: 10px;">📊 Skin Care Training Document</h3>
+                            <p style="color: #7f8c8d;">Access comprehensive training materials and presentation resources</p>
+                        </div>
                         
-                        <div class="ppt-viewer" id="pptViewer">
-                            <div class="ppt-placeholder" id="pptPlaceholder">
-                                <div style="font-size: 3rem; margin-bottom: 20px;">📋</div>
-                                <h4>PowerPoint Presentation Viewer</h4>
-                                <p>Upload your PowerPoint file to view slides here</p>
-                                <div class="loading-spinner" id="pptLoader" style="display: none; margin: 20px auto;"></div>
+                        <!-- PDF Viewer contained within the white canvas -->
+                        <div style="background: #f8f9fa; border-radius: 12px; padding: 20px; margin-bottom: 25px;">
+                            <div style="background: white; border-radius: 10px; padding: 0; overflow: hidden; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);">
+                                <iframe src="SKIN-CARE-TRAINING.pdf" 
+                                        width="100%" 
+                                        height="600px" 
+                                        style="border: none; display: block; border-radius: 10px;">
+                                </iframe>
                             </div>
-                            <div id="pptContent" style="display: none;">
-                                <!-- PowerPoint content will be loaded here -->
-                            </div>
+                            <p style="color: #666; text-align: center; margin-top: 15px; font-size: 0.9rem; font-style: italic;">
+                                Use the controls above to navigate through the training presentation
+                            </p>
                         </div>
-
-                        <div class="ppt-controls">
-                            <input type="file" id="pptUpload" accept=".pptx,.ppt" style="display: none;" onchange="loadPowerPoint(this)">
-                            <button class="ppt-btn" onclick="document.getElementById('pptUpload').click()">
-                                📤 Upload PowerPoint
-                            </button>
-                            <a href="SKIN CARE TRAINING DOCUMENT BY TAMILARASAN R 1.pptx" class="ppt-btn" download>
-                                📥 Download Training Materials
+                        
+                        <!-- Download buttons -->
+                        <div style="display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;">
+                            <a href="SKIN-CARE-TRAINING.pdf" 
+                               style="background: linear-gradient(45deg, #667eea, #764ba2); color: white; padding: 12px 30px; border-radius: 25px; text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 10px; transition: all 0.3s ease; box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);"
+                               download
+                               onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 8px 20px rgba(102, 126, 234, 0.4)'"
+                               onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 5px 15px rgba(102, 126, 234, 0.3)'">
+                                <span style="font-size: 1.2rem;">📄</span> Download PDF
                             </a>
-                            <button class="ppt-btn" onclick="toggleFullscreen()">
-                                🖥️ Fullscreen Mode
-                            </button>
+                            
+                            <a href="https://raw.githubusercontent.com/Cyril-20/SKINCARE/main/SKIN%20CARE%20TRAINING%20DOCUMENT%20BY%20TAMILARASAN%20R%201.pptx" 
+                               style="background: linear-gradient(45deg, #f59e0b, #ef4444); color: white; padding: 12px 30px; border-radius: 25px; text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 10px; transition: all 0.3s ease; box-shadow: 0 5px 15px rgba(245, 158, 11, 0.3);"
+                               download
+                               onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 8px 20px rgba(245, 158, 11, 0.4)'"
+                               onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 5px 15px rgba(245, 158, 11, 0.3)'">
+                                <span style="font-size: 1.2rem;">📊</span> Download PowerPoint
+                            </a>
                         </div>
+                    </div>
+                </div>
 
-                        <div class="responsive-grid" style="margin-top: 30px;">
-                            <div class="card">
-                                <div class="card-title">🎓 Training Modules Overview</div>
-                                <ul style="color: #333; margin-left: 20px;">
-                                    <li>Product Classification Fundamentals</li>
-                                    <li>Characteristic Identification Methods</li>
-                                    <li>KP Guidelines Implementation</li>
-                                    <li>CCN Database Navigation</li>
-                                    <li>Quality Control Standards</li>
-                                    <li>Professional Documentation</li>
-                                </ul>
-                            </div>
-                            <div class="card">
-                                <div class="card-title">📋 Quick Navigation</div>
-                                <p style="color: #666; margin-bottom: 15px;">Jump to any data section for quick reference during training.</p>
-                                <div style="display: flex; flex-wrap: wrap; gap: 8px;">
-                                    <button onclick="showTab('definition')" style="background: #667eea; color: white; border: none; padding: 6px 12px; border-radius: 15px; font-size: 0.8rem; cursor: pointer;">📖 Definitions</button>
-                                    <button onclick="showTab('ccn')" style="background: #667eea; color: white; border: none; padding: 6px 12px; border-radius: 15px; font-size: 0.8rem; cursor: pointer;">🏷️ CCN</button>
-                                    <button onclick="showTab('guidelines')" style="background: #667eea; color: white; border: none; padding: 6px 12px; border-radius: 15px; font-size: 0.8rem; cursor: pointer;">📋 Guidelines</button>
-                                    <button onclick="showTab('characteristics')" style="background: #667eea; color: white; border: none; padding: 6px 12px; border-radius: 15px; font-size: 0.8rem; cursor: pointer;">🔍 Characteristics</button>
+                <!-- VBA Tools Tab -->
+                <div id="vba-tools" class="tab-pane">
+                    <div class="vba-tools-container">
+                        <div style="text-align: center; margin-bottom: 40px;">
+                            <h2 style="font-size: 2.5rem; margin-bottom: 15px;">🛠️ Advanced Text Processing Suite</h2>
+                            <p style="font-size: 1.2rem; opacity: 0.9;">Professional abbreviation tools with intelligent algorithms</p>
+                            <div style="display: flex; justify-content: center; gap: 30px; margin-top: 20px; flex-wrap: wrap;">
+                                <div style="background: rgba(255,255,255,0.1); padding: 15px 25px; border-radius: 25px; backdrop-filter: blur(10px);">
+                                    <span style="font-size: 1.5rem;">⚡</span> Smart Processing
                                 </div>
+                                <div style="background: rgba(255,255,255,0.1); padding: 15px 25px; border-radius: 25px; backdrop-filter: blur(10px);">
+                                    <span style="font-size: 1.5rem;">🎯</span> Precision Results
+                                </div>
+                                <div style="background: rgba(255,255,255,0.1); padding: 15px 25px; border-radius: 25px; backdrop-filter: blur(10px);">
+                                    <span style="font-size: 1.5rem;">🔧</span> Enterprise Ready
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="responsive-grid">
+                            <div class="tool-section" style="position: relative; overflow: hidden;">
+                                <div style="position: absolute; top: 10px; right: 15px; background: rgba(255,255,255,0.2); padding: 5px 12px; border-radius: 15px; font-size: 0.8rem; font-weight: bold;">
+                                    ✂️ SMART ABBREVIATOR
+                                </div>
+                                <h3 style="font-size: 1.8rem; margin-bottom: 15px; color: #fff;">Value Text Processor</h3>
+                                <p style="opacity: 0.9; margin-bottom: 25px; line-height: 1.6;">
+                                    Advanced algorithm that intelligently reduces text length to exactly 60 characters while preserving meaning, context, and readability.
+                                </p>
+                                
+                                <div class="tool-form">
+                                    <div class="form-group">
+                                        <label class="form-label" style="display: flex; align-items: center; gap: 8px;">
+                                            <span style="font-size: 1.1rem;">📝</span> Input Text:
+                                        </label>
+                                        <textarea 
+                                            class="form-textarea" 
+                                            id="valueInput" 
+                                            placeholder="Enter your text here (e.g., product descriptions, long names, technical specifications...)"
+                                            style="min-height: 120px; font-size: 1rem; line-height: 1.5;"
+                                        ></textarea>
+                                        <div class="char-counter" id="valueInputCounter" style="display: flex; justify-content: space-between;">
+                                            <span>0 characters</span>
+                                            <span id="valueInputStatus" style="color: #4ade80;">Ready for processing</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div style="display: flex; gap: 15px; margin: 20px 0;">
+                                        <button class="tool-btn" onclick="processValueAbbreviation()" style="flex: 1; padding: 15px; font-size: 1.1rem; font-weight: bold;">
+                                            <span style="font-size: 1.2rem;">⚡</span> Process Text
+                                        </button>
+                                        <button class="tool-btn" onclick="clearValueInputs()" style="background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.2);">
+                                            🗑️ Clear
+                                        </button>
+                                        <button class="tool-btn" onclick="copyValueResult()" style="background: rgba(76, 175, 80, 0.3); border-color: rgba(76, 175, 80, 0.5);">
+                                            📋 Copy
+                                        </button>
+                                    </div>
+                                    
+                                    <div class="result-display" id="valueResult">
+                                        <div style="text-align: center; color: #666;">
+                                            <div style="font-size: 2rem; margin-bottom: 10px;">✨</div>
+                                            <div>Processed result will appear here</div>
+                                        </div>
+                                    </div>
+                                    <div class="char-counter" id="valueResultCounter" style="display: flex; justify-content: space-between;">
+                                        <span>0 characters</span>
+                                        <span id="valueCompressionRatio" style="color: #4ade80;"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="tool-section" style="position: relative; overflow: hidden;">
+                                <div style="position: absolute; top: 10px; right: 15px; background: rgba(255,255,255,0.2); padding: 5px 12px; border-radius: 15px; font-size: 0.8rem; font-weight: bold;">
+                                    🏷️ BRAND FORMATTER
+                                </div>
+                                <h3 style="font-size: 1.8rem; margin-bottom: 15px; color: #fff;">Brand Name Processor</h3>
+                                <p style="opacity: 0.9; margin-bottom: 25px; line-height: 1.6;">
+                                    Professional brand name formatting with intelligent abbreviation and standardized company owner notation.
+                                </p>
+                                
+                                <div class="tool-form">
+                                    <div class="form-group">
+                                        <label class="form-label" style="display: flex; align-items: center; gap: 8px;">
+                                            <span style="font-size: 1.1rem;">🎯</span> Brand Name:
+                                        </label>
+                                        <input 
+                                            type="text" 
+                                            class="form-input" 
+                                            id="brandInput" 
+                                            placeholder="e.g., ClevaHome Advanced Skincare Solutions"
+                                            style="font-size: 1rem; padding: 15px;"
+                                        >
+                                        <div class="char-counter" id="brandInputCounter">0 characters</div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label class="form-label" style="display: flex; align-items: center; gap: 8px;">
+                                            <span style="font-size: 1.1rem;">🏢</span> Brand Owner/Company:
+                                        </label>
+                                        <input 
+                                            type="text" 
+                                            class="form-input" 
+                                            id="brandOwnerInput" 
+                                            placeholder="e.g., Unilever Limited Liability Company"
+                                            style="font-size: 1rem; padding: 15px;"
+                                        >
+                                        <div class="char-counter" id="brandOwnerCounter">0 characters</div>
+                                    </div>
+                                    
+                                    <div style="display: flex; gap: 15px; margin: 20px 0;">
+                                        <button class="tool-btn" onclick="processBrandAbbreviation()" style="flex: 1; padding: 15px; font-size: 1.1rem; font-weight: bold;">
+                                            <span style="font-size: 1.2rem;">🎨</span> Format Brand
+                                        </button>
+                                        <button class="tool-btn" onclick="clearBrandInputs()" style="background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.2);">
+                                            🗑️ Clear
+                                        </button>
+                                        <button class="tool-btn" onclick="copyBrandResult()" style="background: rgba(76, 175, 80, 0.3); border-color: rgba(76, 175, 80, 0.5);">
+                                            📋 Copy
+                                        </button>
+                                    </div>
+                                    
+                                    <div class="result-display" id="brandResult">
+                                        <div style="text-align: center; color: #666;">
+                                            <div style="font-size: 2rem; margin-bottom: 10px;">🎯</div>
+                                            <div>Formatted brand name will appear here</div>
+                                        </div>
+                                    </div>
+                                    <div class="char-counter" id="brandResultCounter" style="display: flex; justify-content: space-between;">
+                                        <span>0 characters</span>
+                                        <span id="brandStatus" style="color: #4ade80;"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="tool-section" style="margin-top: 40px; background: linear-gradient(135deg, rgba(255,255,255,0.15), rgba(255,255,255,0.05));">
+                            <div style="text-align: center; margin-bottom: 30px;">
+                                <h3 style="font-size: 1.8rem; margin-bottom: 10px;">📚 Algorithm Intelligence & Features</h3>
+                                <p style="opacity: 0.9;">Advanced processing capabilities powered by sophisticated text analysis</p>
+                            </div>
+                            
+                            <div class="two-column-grid" style="gap: 30px;">
+                                <div style="background: rgba(255,255,255,0.1); padding: 25px; border-radius: 15px; backdrop-filter: blur(10px);">
+                                    <h4 style="color: #fff; margin-bottom: 20px; display: flex; align-items: center; gap: 10px;">
+                                        <span style="font-size: 1.5rem;">✂️</span> Value Abbreviator Intelligence
+                                    </h4>
+                                    <div style="display: grid; gap: 12px;">
+                                        <div style="display: flex; align-items: center; gap: 12px; padding: 10px; background: rgba(255,255,255,0.1); border-radius: 8px;">
+                                            <span style="color: #4ade80; font-size: 1.2rem;">🧠</span>
+                                            <span>Smart vowel preservation algorithm</span>
+                                        </div>
+                                        <div style="display: flex; align-items: center; gap: 12px; padding: 10px; background: rgba(255,255,255,0.1); border-radius: 8px;">
+                                            <span style="color: #60a5fa; font-size: 1.2rem;">🔍</span>
+                                            <span>Noise word detection & removal</span>
+                                        </div>
+                                        <div style="display: flex; align-items: center; gap: 12px; padding: 10px; background: rgba(255,255,255,0.1); border-radius: 8px;">
+                                            <span style="color: #f59e0b; font-size: 1.2rem;">⚙️</span>
+                                            <span>Repeated letter optimization</span>
+                                        </div>
+                                        <div style="display: flex; align-items: center; gap: 12px; padding: 10px; background: rgba(255,255,255,0.1); border-radius: 8px;">
+                                            <span style="color: #ec4899; font-size: 1.2rem;">✨</span>
+                                            <span>Context-aware capitalization</span>
+                                        </div>
+                                        <div style="display: flex; align-items: center; gap: 12px; padding: 10px; background: rgba(255,255,255,0.1); border-radius: 8px;">
+                                            <span style="color: #8b5cf6; font-size: 1.2rem;">🛡️</span>
+                                            <span>Special character handling</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div style="background: rgba(255,255,255,0.1); padding: 25px; border-radius: 15px; backdrop-filter: blur(10px);">
+                                    <h4 style="color: #fff; margin-bottom: 20px; display: flex; align-items: center; gap: 10px;">
+                                        <span style="font-size: 1.5rem;">🏷️</span> Brand Formatter Intelligence
+                                    </h4>
+                                    <div style="display: grid; gap: 12px;">
+                                        <div style="display: flex; align-items: center; gap: 12px; padding: 10px; background: rgba(255,255,255,0.1); border-radius: 8px;">
+                                            <span style="color: #4ade80; font-size: 1.2rem;">🏢</span>
+                                            <span>Company name standardization</span>
+                                        </div>
+                                        <div style="display: flex; align-items: center; gap: 12px; padding: 10px; background: rgba(255,255,255,0.1); border-radius: 8px;">
+                                            <span style="color: #60a5fa; font-size: 1.2rem;">📐</span>
+                                            <span>40-character limit compliance</span>
+                                        </div>
+                                        <div style="display: flex; align-items: center; gap: 12px; padding: 10px; background: rgba(255,255,255,0.1); border-radius: 8px;">
+                                            <span style="color: #f59e0b; font-size: 1.2rem;">🎯</span>
+                                            <span>Format: Brand (OWNER) structure</span>
+                                        </div>
+                                        <div style="display: flex; align-items: center; gap: 12px; padding: 10px; background: rgba(255,255,255,0.1); border-radius: 8px;">
+                                            <span style="color: #ec4899; font-size: 1.2rem;">🔄</span>
+                                            <span>Intelligent case preservation</span>
+                                        </div>
+                                        <div style="display: flex; align-items: center; gap: 12px; padding: 10px; background: rgba(255,255,255,0.1); border-radius: 8px;">
+                                            <span style="color: #8b5cf6; font-size: 1.2rem;">⚡</span>
+                                            <span>Real-time validation checks</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div style="margin-top: 30px; padding: 20px; background: rgba(59, 130, 246, 0.1); border-radius: 10px; border-left: 4px solid #3b82f6;">
+                                <h4 style="color: #fff; margin-bottom: 10px;">💡 Pro Tips for Best Results:</h4>
+                                <ul style="color: rgba(255,255,255,0.9); margin-left: 20px; line-height: 1.8;">
+                                    <li><strong>Value Abbreviator:</strong> Works best with product descriptions, technical specifications, and long form text</li>
+                                    <li><strong>Brand Formatter:</strong> Input brand names as they appear on product labels for optimal case sensitivity</li>
+                                    <li><strong>Special Characters:</strong> Both tools handle &, !, parentheses, and other symbols intelligently</li>
+                                    <li><strong>Processing Time:</strong> Complex text may take a moment to process for optimal results</li>
+                                </ul>
                             </div>
                         </div>
                     </div>
@@ -807,184 +1345,278 @@
     </div>
 
     <script>
-        // Excel Data Storage
-        let excelData = {
-            agenda: [],
-            definition: [],
-            characteristics: [],
-            keyChars: [],
-            guidelines: [],
-            ccn: [],
-            impc: [],
-            updates: [],
-            categoryVsCommodity: []
-        };
+        // Global variables for dynamic data management
+        let excelData = {};
+        let activeSheets = [];
+        let columnFilters = {};
 
-        // Initialize with sample data (will be replaced with real Excel data)
-        function initializeSampleData() {
-            excelData.definition = [
-                ["COMMODITY", "DEFINITION", "EXAMPLE-1", "EXAMPLE-2"],
-                ["HAND AND BODY LOTION AND OIL", "Emulsified or non-emulsified preparations intended to be applied to the skin for cosmetic and/or therapeutic purposes", "Body lotion", "Hand cream"],
-                ["SUNTAN AND AFTER TAN PREPARATION", "Products intended to protect skin from harmful UV rays or soothe skin after sun exposure", "Sunscreen", "After-sun lotion"],
-                ["DEPILATORY PRODUCT", "Chemical or mechanical products for removing unwanted body hair", "Hair removal cream", "Depilatory wax"],
-                ["SHAVING CREAM AND AFTER SHAVE", "Products that facilitate shaving or treat skin after shaving", "Shaving gel", "After shave balm"],
-                ["BATH ADDITIVE AND OIL", "Products added to bath water for cleansing, moisturizing or aromatic purposes", "Bath oil", "Bath salts"]
-            ];
-
-            excelData.ccn = [
-                ["CATEGORY", "COMMODITY GROUP", "COMMON CONSUMER NAME"],
-                ["SKIN CARE", "HAND AND BODY LOTION AND OIL", "ABDOMINAL CONTROL CREAM"],
-                ["SKIN CARE", "HAND AND BODY LOTION AND OIL", "ABDOMINAL TONING CREAM"],
-                ["SKIN CARE", "HAND AND BODY LOTION AND OIL", "AFTER SUN LOTION"],
-                ["SKIN CARE", "SUNTAN AND AFTER TAN PREPARATION", "SUNSCREEN LOTION"],
-                ["SKIN CARE", "SUNTAN AND AFTER TAN PREPARATION", "TANNING OIL"],
-                ["SKIN CARE", "DEPILATORY PRODUCT", "HAIR REMOVAL CREAM"],
-                ["SKIN CARE", "SHAVING CREAM AND AFTER SHAVE", "SHAVING GEL"],
-                ["SKIN CARE", "BATH ADDITIVE AND OIL", "BATH SALT"]
-            ];
-
-            excelData.guidelines = [
-                ["Date", "Instructor", "TYPE", "Category", "Cluster", "GUIDELINE", "Characteristic"],
-                ["2012-07-16", "KP Instructor", "KP", "SKIN CARE", "BATH ADDITIVE AND OIL", "If a product states Essential Oils Mineral Bath, code into Bath Additive and Oil", "essential oils placement"],
-                ["2012-09-18", "KP Instructor", "KP", "SKIN CARE", "BATH ADDITIVE AND OIL", "If no form is stated, it can be observed, but if you can't observe it use liquid.", "form"],
-                ["2013-03-15", "KP Instructor", "KP", "SKIN CARE", "HAND AND BODY LOTION AND OIL", "Products with SPF should be classified under suntan preparation if SPF is the primary claim", "SPF classification"]
-            ];
-
-            excelData.characteristics = [
-                ["CHAR", "CHAR DEFINITION", "HAND AND BODY LOTION", "SUNTAN PREPARATION", "DEPILATORY PRODUCT"],
-                ["COLOR", "Visual appearance of the product", "Applicable", "Applicable", "Applicable"],
-                ["FORM", "Physical state (liquid, cream, gel)", "Yes", "Yes", "Yes"],
-                ["SCENT", "Fragrance or aroma", "Yes", "Yes", "Limited"],
-                ["APPLICATION AREA", "Where product is applied", "Body/Hand", "Body/Face", "Body"]
-            ];
-
-            excelData.keyChars = [
-                ["CLUSTER", "BRAND", "FORM", "SCENT", "TARGET GROUP", "PACK TYPE"],
-                ["BATH ADDITIVE AND OIL", "Yes", "Yes", "Yes", "Yes", "Yes"],
-                ["BLEACHING AND TONING PRODUCT", "Yes", "Yes", "Yes", "Yes", "Yes"],
-                ["HAND AND BODY LOTION AND OIL", "Yes", "Yes", "Yes", "Yes", "Yes"]
-            ];
-
-            excelData.impc = [
-                ["IMPC", "CG", "CCN", "Application area", "Form", "Default"],
-                ["7034", "Personal cleanser other than bar", "Hand soap/Hand wash", "hand/not stated", "Liquid/Gel", ""],
-                ["7035", "Personal cleanser bar and novelty soap", "Bar soap", "anything", "Bar", ""],
-                ["7036", "Shaving cream and after shave", "Shaving cream", "face", "Cream", ""]
-            ];
-
-            excelData.updates = [
-                ["IMAGE", "ANSWER"],
-                ["Classification Update", "Need to code it in DEPILATORY PRODUCT CCN as DEPILATORY. Please refer this GIC - 509983689"],
-                ["Product Update", "Need to code it in HAND AND BODY LOTION AND OIL with the ccn of HAND AND BODY AND SKIN PRODUCT"],
-                ["Guideline Update", "Updated SPF classification guidelines for suntan products"],
-                ["Form Update", "Liquid form should be default for cleansers when not specified"]
-            ];
-        }
-
-        // Load real Excel data from GitHub
-        async function loadExcelData() {
-            try {
-                console.log('Loading Excel data from GitHub...');
-                
-                // Try to load the Excel file from GitHub repository
-                const response = await fetch('SKIN CARE COMPLETE DOCUMENT BY TAMILARASAN R 3.xlsx');
-                if (response.ok) {
-                    const arrayBuffer = await response.arrayBuffer();
-                    const workbook = XLSX.read(arrayBuffer, {
-                        cellStyles: true,
-                        cellFormulas: true,
-                        cellDates: true,
-                        cellNF: true,
-                        sheetStubs: true
-                    });
-
-                    // Process each sheet
-                    const sheetMapping = {
-                        'AGENDA': 'agenda',
-                        'DEFINITION': 'definition', 
-                        ' CHARACTERISTIC ': 'characteristics',
-                        'KEY CHARS': 'keyChars',
-                        'KP GUIDELINES': 'guidelines',
-                        'CCN': 'ccn',
-                        'IMPC': 'impc',
-                        'GENERAL UPDATES': 'updates',
-                        'CATEGORY VS COMMODITY': 'categoryVsCommodity'
-                    };
-
-                    workbook.SheetNames.forEach(sheetName => {
-                        const mappedName = sheetMapping[sheetName];
-                        if (mappedName) {
-                            const worksheet = workbook.Sheets[sheetName];
-                            const jsonData = XLSX.utils.sheet_to_json(worksheet, { 
-                                header: 1, 
-                                defval: "",
-                                blankrows: false
-                            });
-                            
-                            // Filter out completely empty rows
-                            const filteredData = jsonData.filter(row => 
-                                row.some(cell => cell !== "" && cell !== null && cell !== undefined)
-                            );
-                            
-                            if (filteredData.length > 0) {
-                                excelData[mappedName] = filteredData;
-                            }
-                        }
-                    });
-
-                    console.log('✅ Real Excel data loaded successfully!');
-                    updateStats();
-                } else {
-                    console.log('Excel file not found, using sample data');
-                    initializeSampleData();
+        // Initialize dashboard
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeWelcomeScreen();
+            loadExcelFromGitHub();
+            setupVBAToolsEventListeners();
+            
+            // Add event listener for VBA Tools button in welcome tab
+            setTimeout(() => {
+                const vbaButton = document.querySelector('.vba-tools-button');
+                if (vbaButton) {
+                    vbaButton.addEventListener('click', () => showTab('vba-tools'));
                 }
-            } catch (error) {
-                console.log('Error loading Excel file, using sample data:', error.message);
-                initializeSampleData();
-            }
+            }, 100);
+        });
 
-            renderAllTables();
-            setupSearchFunctionality();
-            populateFilters();
-        }
-
-        // Tab functionality
-        function showTab(tabName) {
+        // Tab functionality - make it global
+        window.showTab = function(tabName) {
+            // Hide all tab panes
             document.querySelectorAll('.tab-pane').forEach(pane => {
                 pane.classList.remove('active');
             });
             
+            // Remove active class from all tab buttons
             document.querySelectorAll('.tab-button').forEach(button => {
                 button.classList.remove('active');
             });
             
-            document.getElementById(tabName).classList.add('active');
-            event.target.classList.add('active');
+            // Show the selected tab pane
+            const targetPane = document.getElementById(tabName);
+            if (targetPane) {
+                targetPane.classList.add('active');
+            }
+            
+            // Find and activate the correct button using data-tab attribute
+            const activeButton = document.querySelector(`.tab-button[data-tab="${tabName}"]`);
+            if (activeButton) {
+                activeButton.classList.add('active');
+            }
             
             // Save user preference
             localStorage.setItem('lastActiveTab', tabName);
         }
 
-        // Create enhanced data table with column filters
-        function createEnhancedTable(data, containerId) {
-            const container = document.getElementById(containerId);
-            if (!container || !data || data.length < 1) {
-                container.innerHTML = '<div class="no-data">No data available</div>';
-                return;
+        // Load Excel file directly from GitHub repository
+        async function loadExcelFromGitHub() {
+            try {
+                document.getElementById('loadingText').textContent = 'Loading Excel file from GitHub repository...';
+                
+                const githubUrl = 'https://raw.githubusercontent.com/Cyril-20/SKINCARE/main/SKIN CARE COMPLETE DOCUMENT BY TAMILARASAN R 3.xlsx';
+                
+                const response = await fetch(githubUrl);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const arrayBuffer = await response.arrayBuffer();
+                const workbook = XLSX.read(arrayBuffer, {
+                    cellStyles: true,
+                    cellFormulas: true,
+                    cellDates: true,
+                    cellNF: true,
+                    sheetStubs: true
+                });
+
+                document.getElementById('loadingText').textContent = 'Processing Excel sheets...';
+
+                // Clear existing data
+                excelData = {};
+                activeSheets = [];
+
+                // Process each sheet
+                workbook.SheetNames.forEach(sheetName => {
+                    const worksheet = workbook.Sheets[sheetName];
+                    const jsonData = XLSX.utils.sheet_to_json(worksheet, { 
+                        header: 1, 
+                        defval: "",
+                        blankrows: false
+                    });
+                    
+                    // Filter out completely empty rows
+                    const filteredData = jsonData.filter(row => 
+                        row.some(cell => cell !== "" && cell !== null && cell !== undefined)
+                    );
+                    
+                    if (filteredData.length > 0) {
+                        const sheetId = sheetName.replace(/[^a-zA-Z0-9]/g, '_').toLowerCase();
+                        excelData[sheetId] = {
+                            name: sheetName,
+                            data: filteredData
+                        };
+                        activeSheets.push({
+                            id: sheetId,
+                            name: sheetName,
+                            data: filteredData
+                        });
+                    }
+                });
+
+                document.getElementById('loadingText').textContent = 'Generating dynamic tabs...';
+                generateDynamicTabs();
+                updateStats();
+                
+                document.getElementById('loadingCard').style.display = 'none';
+                
+                showNotification('✅ Excel file loaded successfully from GitHub! All sheets processed.', 'success');
+                
+            } catch (error) {
+                console.error('Error loading Excel file from GitHub:', error);
+                document.getElementById('loadingText').textContent = 'Failed to load from GitHub. Loading sample data...';
+                loadSampleData();
+                showNotification('⚠️ Could not load from GitHub. Sample data loaded instead.', 'warning');
+            }
+        }
+
+        // Load sample data as fallback
+        function loadSampleData() {
+            excelData = {};
+            activeSheets = [];
+            
+            const sampleSheets = [
+                {
+                    id: 'definition',
+                    name: 'DEFINITION',
+                    data: [
+                        ["COMMODITY", "DEFINITION", "EXAMPLE-1", "EXAMPLE-2"],
+                        ["HAND AND BODY LOTION AND OIL", "Emulsified or non-emulsified preparations intended to be applied to the skin for cosmetic and/or therapeutic purposes", "Body lotion", "Hand cream"],
+                        ["SUNTAN AND AFTER TAN PREPARATION", "Products intended to protect skin from harmful UV rays or soothe skin after sun exposure", "Sunscreen", "After-sun lotion"],
+                        ["DEPILATORY PRODUCT", "Chemical or mechanical products for removing unwanted body hair", "Hair removal cream", "Depilatory wax"],
+                        ["SHAVING CREAM AND AFTER SHAVE", "Products that facilitate shaving or treat skin after shaving", "Shaving gel", "After shave balm"]
+                    ]
+                },
+                {
+                    id: 'ccn',
+                    name: 'CCN',
+                    data: [
+                        ["CATEGORY", "COMMODITY GROUP", "COMMON CONSUMER NAME"],
+                        ["SKIN CARE", "HAND AND BODY LOTION AND OIL", "ABDOMINAL CONTROL CREAM"],
+                        ["SKIN CARE", "HAND AND BODY LOTION AND OIL", "ABDOMINAL TONING CREAM"],
+                        ["SKIN CARE", "HAND AND BODY LOTION AND OIL", "AFTER SUN LOTION"],
+                        ["SKIN CARE", "SUNTAN AND AFTER TAN PREPARATION", "SUNSCREEN LOTION"]
+                    ]
+                }
+            ];
+            
+            activeSheets = sampleSheets;
+            sampleSheets.forEach(sheet => {
+                excelData[sheet.id] = sheet;
+            });
+            
+            generateDynamicTabs();
+            updateStats();
+            
+            document.getElementById('loadingCard').style.display = 'none';
+        }
+
+        // Generate dynamic tabs based on loaded sheets
+        function generateDynamicTabs() {
+            const tabNavigation = document.getElementById('tabNavigation');
+            const tabContent = document.getElementById('tabContent');
+            
+            tabNavigation.innerHTML = '';
+            
+            // Welcome tab
+            const welcomeBtn = document.createElement('button');
+            welcomeBtn.className = 'tab-button active';
+            welcomeBtn.textContent = '🏠 Welcome';
+            welcomeBtn.setAttribute('data-tab', 'welcome');
+            welcomeBtn.addEventListener('click', () => showTab('welcome'));
+            tabNavigation.appendChild(welcomeBtn);
+            
+            // Data sheet tabs
+            activeSheets.forEach(sheet => {
+                const btn = document.createElement('button');
+                btn.className = 'tab-button';
+                btn.textContent = `${getSheetIcon(sheet.name)} ${sheet.name}`;
+                btn.setAttribute('data-tab', sheet.id);
+                btn.addEventListener('click', () => showTab(sheet.id));
+                tabNavigation.appendChild(btn);
+            });
+
+            // Training tab
+            const trainingBtn = document.createElement('button');
+            trainingBtn.className = 'tab-button';
+            trainingBtn.textContent = '🎓 Training';
+            trainingBtn.setAttribute('data-tab', 'training');
+            trainingBtn.addEventListener('click', () => showTab('training'));
+            tabNavigation.appendChild(trainingBtn);
+            
+            // VBA Tools tab
+            const vbaBtn = document.createElement('button');
+            vbaBtn.className = 'tab-button';
+            vbaBtn.textContent = '🛠️ VBA Tools';
+            vbaBtn.setAttribute('data-tab', 'vba-tools');
+            vbaBtn.addEventListener('click', () => showTab('vba-tools'));
+            tabNavigation.appendChild(vbaBtn);
+            
+            // Generate tab content
+            let tabPanes = document.getElementById('tabContent').innerHTML;
+            
+            activeSheets.forEach(sheet => {
+                tabPanes += generateSheetTab(sheet);
+            });
+            
+            tabContent.innerHTML = tabPanes;
+            
+            setupDynamicSearchFunctionality();
+            setupColumnFilters();
+            updateWelcomeTab();
+        }
+
+        // Get appropriate icon for sheet name
+        function getSheetIcon(sheetName) {
+            const name = sheetName.toLowerCase();
+            if (name.includes('definition')) return '📖';
+            if (name.includes('ccn')) return '🏷️';
+            if (name.includes('guideline')) return '📋';
+            if (name.includes('characteristic')) return '🔍';
+            if (name.includes('impc')) return '🔢';
+            if (name.includes('update')) return '🔄';
+            if (name.includes('agenda')) return '📋';
+            return '📊';
+        }
+
+        // Generate content for individual sheet
+        function generateSheetTab(sheet) {
+            return `
+                <div id="${sheet.id}" class="tab-pane">
+                    <h2>${getSheetIcon(sheet.name)} ${sheet.name}</h2>
+                    <div class="table-controls">
+                        <input type="text" class="search-input" id="${sheet.id}Search" placeholder="🔍 Search ${sheet.name} data...">
+                        <button class="export-btn" onclick="exportToExcel('${sheet.id}')">📥 Export Excel</button>
+                    </div>
+                    <div class="table-wrapper">
+                        <div class="table-container" id="${sheet.id}TableContainer">
+                            <div id="${sheet.id}Table">${generateDataTable(sheet.data, sheet.id)}</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Generate data table HTML with filter capability
+        function generateDataTable(data, sheetId) {
+            if (!data || data.length === 0) {
+                return '<div class="no-data">No data available</div>';
             }
 
             const headers = data[0] || [];
             const rows = data.slice(1);
 
-            let html = `
-                <table class="data-table">
+            return `
+                <table class="data-table" id="table-${sheetId}">
                     <thead>
                         <tr>
                             ${headers.map((header, index) => `
-                                <th>
-                                    <div>${header}</div>
-                                    <div class="column-filter">
-                                        <input type="text" placeholder="Filter..." onkeyup="filterColumn('${containerId}', ${index}, this.value)">
+                                <th style="position: relative;">
+                                    <span onclick="toggleColumnFilter('${sheetId}', ${index}, this)">
+                                        ${header} <span class="filter-icon">🔽</span>
+                                    </span>
+                                    <div class="column-filter" id="filter-${sheetId}-${index}">
+                                        <input type="text" class="filter-search" placeholder="Search values..." 
+                                               oninput="filterColumnValues('${sheetId}', ${index})">
+                                        <div id="filter-options-${sheetId}-${index}"></div>
+                                        <div class="filter-actions">
+                                            <button class="filter-btn apply" onclick="applyColumnFilter('${sheetId}', ${index})">Apply</button>
+                                            <button class="filter-btn clear" onclick="clearColumnFilter('${sheetId}', ${index})">Clear</button>
+                                        </div>
                                     </div>
                                 </th>
                             `).join('')}
@@ -999,24 +1631,145 @@
                     </tbody>
                 </table>
             `;
-
-            container.innerHTML = html;
         }
 
-        // Filter by column
-        function filterColumn(containerId, columnIndex, filterValue) {
-            const container = document.getElementById(containerId);
-            const table = container.querySelector('.data-table');
-            if (!table) return;
+        // Setup column filters
+        function setupColumnFilters() {
+            activeSheets.forEach(sheet => {
+                const data = sheet.data;
+                if (data.length < 2) return;
 
+                const headers = data[0];
+                const rows = data.slice(1);
+
+                headers.forEach((header, colIndex) => {
+                    // Get unique values for this column
+                    const uniqueValues = [...new Set(rows.map(row => row[colIndex] || ''))].sort();
+                    
+                    // Initialize filter state
+                    if (!columnFilters[sheet.id]) {
+                        columnFilters[sheet.id] = {};
+                    }
+                    columnFilters[sheet.id][colIndex] = {
+                        values: uniqueValues,
+                        selected: new Set(uniqueValues)
+                    };
+
+                    // Populate filter options
+                    const optionsDiv = document.getElementById(`filter-options-${sheet.id}-${colIndex}`);
+                    if (optionsDiv) {
+                        optionsDiv.innerHTML = uniqueValues.map(value => `
+                            <div class="filter-option">
+                                <input type="checkbox" id="filter-${sheet.id}-${colIndex}-${value}" 
+                                       value="${value}" checked 
+                                       onchange="updateFilterSelection('${sheet.id}', ${colIndex}, '${value}', this.checked)">
+                                <label for="filter-${sheet.id}-${colIndex}-${value}">${value || '(empty)'}</label>
+                            </div>
+                        `).join('');
+                    }
+                });
+            });
+        }
+
+        // Toggle column filter dropdown
+        window.toggleColumnFilter = function(sheetId, colIndex, element) {
+            // Close all other filters
+            document.querySelectorAll('.column-filter').forEach(filter => {
+                if (filter.id !== `filter-${sheetId}-${colIndex}`) {
+                    filter.classList.remove('active');
+                }
+            });
+
+            // Toggle current filter
+            const filter = document.getElementById(`filter-${sheetId}-${colIndex}`);
+            filter.classList.toggle('active');
+
+            // Close filter when clicking outside
+            if (filter.classList.contains('active')) {
+                setTimeout(() => {
+                    const closeFilter = (e) => {
+                        if (!filter.contains(e.target) && !element.contains(e.target)) {
+                            filter.classList.remove('active');
+                            document.removeEventListener('click', closeFilter);
+                        }
+                    };
+                    document.addEventListener('click', closeFilter);
+                }, 0);
+            }
+        }
+
+        // Filter column values in dropdown
+        window.filterColumnValues = function(sheetId, colIndex) {
+            const searchInput = document.querySelector(`#filter-${sheetId}-${colIndex} .filter-search`);
+            const searchTerm = searchInput.value.toLowerCase();
+            const options = document.querySelectorAll(`#filter-options-${sheetId}-${colIndex} .filter-option`);
+
+            options.forEach(option => {
+                const label = option.querySelector('label').textContent.toLowerCase();
+                option.style.display = label.includes(searchTerm) ? 'flex' : 'none';
+            });
+        }
+
+        // Update filter selection
+        window.updateFilterSelection = function(sheetId, colIndex, value, checked) {
+            if (checked) {
+                columnFilters[sheetId][colIndex].selected.add(value);
+            } else {
+                columnFilters[sheetId][colIndex].selected.delete(value);
+            }
+        }
+
+        // Apply column filter
+        window.applyColumnFilter = function(sheetId, colIndex) {
+            const table = document.getElementById(`table-${sheetId}`);
             const rows = table.querySelectorAll('tbody tr');
-            
+            const selectedValues = columnFilters[sheetId][colIndex].selected;
+
             rows.forEach(row => {
-                const cells = row.querySelectorAll('td');
-                if (cells[columnIndex]) {
-                    const cellText = cells[columnIndex].textContent.toLowerCase();
-                    const showRow = filterValue === '' || cellText.includes(filterValue.toLowerCase());
-                    row.style.display = showRow ? '' : 'none';
+                const cell = row.cells[colIndex];
+                const cellValue = cell ? cell.textContent.trim() : '';
+                
+                // Check all column filters
+                let showRow = true;
+                Object.keys(columnFilters[sheetId]).forEach(idx => {
+                    const checkCell = row.cells[idx];
+                    const checkValue = checkCell ? checkCell.textContent.trim() : '';
+                    if (!columnFilters[sheetId][idx].selected.has(checkValue)) {
+                        showRow = false;
+                    }
+                });
+
+                row.style.display = showRow ? '' : 'none';
+            });
+
+            // Close filter dropdown
+            document.getElementById(`filter-${sheetId}-${colIndex}`).classList.remove('active');
+            showNotification('✅ Filter applied successfully', 'success');
+        }
+
+        // Clear column filter
+        window.clearColumnFilter = function(sheetId, colIndex) {
+            // Reset all checkboxes
+            const checkboxes = document.querySelectorAll(`#filter-options-${sheetId}-${colIndex} input[type="checkbox"]`);
+            checkboxes.forEach(cb => cb.checked = true);
+
+            // Reset selected values
+            columnFilters[sheetId][colIndex].selected = new Set(columnFilters[sheetId][colIndex].values);
+
+            // Show all rows
+            applyColumnFilter(sheetId, colIndex);
+            
+            showNotification('✅ Filter cleared', 'success');
+        }
+
+        // Setup search functionality for dynamic tabs
+        function setupDynamicSearchFunctionality() {
+            activeSheets.forEach(sheet => {
+                const searchInput = document.getElementById(`${sheet.id}Search`);
+                if (searchInput) {
+                    searchInput.addEventListener('input', function(e) {
+                        searchTable(`${sheet.id}Table`, e.target.value);
+                    });
                 }
             });
         }
@@ -1037,201 +1790,474 @@
             });
         }
 
-        // Render all tables
-        function renderAllTables() {
-            createEnhancedTable(excelData.definition, 'definitionTable');
-            createEnhancedTable(excelData.characteristics, 'characteristicsTable');
-            createEnhancedTable(excelData.keyChars, 'keyCharsTable');
-            createEnhancedTable(excelData.guidelines, 'guidelinesTable');
-            createEnhancedTable(excelData.ccn, 'ccnTable');
-            createEnhancedTable(excelData.impc, 'impcTable');
-            createEnhancedTable(excelData.updates, 'updatesTable');
-        }
-
-        // Setup search functionality
-        function setupSearchFunctionality() {
-            const searchMappings = [
-                { input: 'definitionSearch', table: 'definitionTable' },
-                { input: 'charSearch', table: 'characteristicsTable' },
-                { input: 'keyCharSearch', table: 'keyCharsTable' },
-                { input: 'guidelinesSearch', table: 'guidelinesTable' },
-                { input: 'ccnSearch', table: 'ccnTable' },
-                { input: 'impcSearch', table: 'impcTable' },
-                { input: 'updatesSearch', table: 'updatesTable' }
-            ];
-
-            searchMappings.forEach(({ input, table }) => {
-                const element = document.getElementById(input);
-                if (element) {
-                    element.addEventListener('input', function(e) {
-                        searchTable(table, e.target.value);
-                    });
+        // Update welcome tab with loaded data
+        function updateWelcomeTab() {
+            const statusDiv = document.getElementById('dataLoadStatus');
+            const buttonsDiv = document.getElementById('quickAccessButtons');
+            
+            if (statusDiv && activeSheets.length > 0) {
+                statusDiv.innerHTML = `✅ Successfully loaded ${activeSheets.length} sheets with ${getTotalRows()} total rows`;
+                
+                if (buttonsDiv) {
+                    buttonsDiv.innerHTML = activeSheets.slice(0, 4).map(sheet => `
+                        <button onclick="showTab('${sheet.id}')" style="background: #667eea; color: white; border: none; padding: 8px 15px; border-radius: 15px; font-size: 0.9rem; cursor: pointer;">
+                            ${getSheetIcon(sheet.name)} ${sheet.name}
+                        </button>
+                    `).join('');
                 }
-            });
-        }
-
-        // Populate filter dropdowns
-        function populateFilters() {
-            // Commodity filter for CCN
-            const commodityFilter = document.getElementById('commodityFilter');
-            if (commodityFilter && excelData.ccn.length > 1) {
-                const commodities = [...new Set(excelData.ccn.slice(1).map(row => row[1] || ''))].filter(Boolean);
-                commodityFilter.innerHTML = '<option value="">All Commodity Groups</option>';
-                commodities.forEach(commodity => {
-                    const option = document.createElement('option');
-                    option.value = commodity;
-                    option.textContent = commodity;
-                    commodityFilter.appendChild(option);
-                });
-
-                commodityFilter.addEventListener('change', function(e) {
-                    if (e.target.value) {
-                        filterColumn('ccnTable', 1, e.target.value);
-                    } else {
-                        // Reset filter
-                        const rows = document.querySelectorAll('#ccnTable tbody tr');
-                        rows.forEach(row => row.style.display = '');
-                    }
-                });
-            }
-
-            // Cluster filter for Guidelines
-            const clusterFilter = document.getElementById('clusterFilter');
-            if (clusterFilter && excelData.guidelines.length > 1) {
-                const clusters = [...new Set(excelData.guidelines.slice(1).map(row => row[4] || ''))].filter(Boolean);
-                clusterFilter.innerHTML = '<option value="">All Clusters</option>';
-                clusters.forEach(cluster => {
-                    const option = document.createElement('option');
-                    option.value = cluster;
-                    option.textContent = cluster;
-                    clusterFilter.appendChild(option);
-                });
-
-                clusterFilter.addEventListener('change', function(e) {
-                    if (e.target.value) {
-                        filterColumn('guidelinesTable', 4, e.target.value);
-                    } else {
-                        // Reset filter
-                        const rows = document.querySelectorAll('#guidelinesTable tbody tr');
-                        rows.forEach(row => row.style.display = '');
-                    }
-                });
             }
         }
 
         // Update statistics
         function updateStats() {
-            document.getElementById('totalCCN').textContent = Math.max(0, (excelData.ccn?.length || 1) - 1);
-            document.getElementById('totalGuidelines').textContent = Math.max(0, (excelData.guidelines?.length || 1) - 1);
+            document.getElementById('totalSheets').textContent = activeSheets.length;
+            document.getElementById('totalRows').textContent = getTotalRows();
+            document.getElementById('totalColumns').textContent = getTotalColumns();
+        }
+
+        // Get total rows across all sheets
+        function getTotalRows() {
+            return activeSheets.reduce((total, sheet) => total + Math.max(0, sheet.data.length - 1), 0);
+        }
+
+        // Get total columns across all sheets
+        function getTotalColumns() {
+            return activeSheets.reduce((total, sheet) => {
+                const headers = sheet.data[0] || [];
+                return total + headers.length;
+            }, 0);
         }
 
         // Export to Excel functionality
-        function exportToExcel(sheetName) {
-            const data = excelData[sheetName];
-            if (!data || data.length === 0) {
-                alert('No data available to export');
+        window.exportToExcel = function(sheetId) {
+            const sheetData = excelData[sheetId];
+            if (!sheetData || !sheetData.data || sheetData.data.length === 0) {
+                showNotification('❌ No data available to export', 'error');
                 return;
             }
 
-            const ws = XLSX.utils.aoa_to_sheet(data);
+            const ws = XLSX.utils.aoa_to_sheet(sheetData.data);
             const wb = XLSX.utils.book_new();
-            XLSX.utils.book_append_sheet(wb, ws, sheetName);
-            XLSX.writeFile(wb, `skincare_${sheetName}_${new Date().toISOString().split('T')[0]}.xlsx`);
-        }
-
-        // PowerPoint functionality
-        function loadPowerPoint(input) {
-            const file = input.files[0];
-            if (!file) return;
-
-            const loader = document.getElementById('pptLoader');
-            const placeholder = document.getElementById('pptPlaceholder');
-            const content = document.getElementById('pptContent');
-
-            loader.style.display = 'block';
-            placeholder.style.display = 'none';
-
-            // Simulate loading (in real implementation, you'd process the PowerPoint file)
-            setTimeout(() => {
-                loader.style.display = 'none';
-                content.style.display = 'block';
-                content.innerHTML = `
-                    <div style="text-align: center; padding: 20px;">
-                        <h3>📊 ${file.name}</h3>
-                        <p>PowerPoint presentation loaded successfully!</p>
-                        <div style="background: rgba(255,255,255,0.1); margin: 20px 0; padding: 20px; border-radius: 10px;">
-                            <p>🎯 <strong>File Size:</strong> ${(file.size / (1024*1024)).toFixed(2)} MB</p>
-                            <p>📅 <strong>Last Modified:</strong> ${new Date(file.lastModified).toLocaleDateString()}</p>
-                        </div>
-                        <p><em>Note: Full PowerPoint viewer will be implemented when hosted on GitHub</em></p>
-                    </div>
-                `;
-            }, 2000);
-        }
-
-        function toggleFullscreen() {
-            const viewer = document.getElementById('pptViewer');
-            if (!document.fullscreenElement) {
-                viewer.requestFullscreen();
-            } else {
-                document.exitFullscreen();
-            }
-        }
-
-        // Auto-refresh data functionality
-        function refreshData() {
-            console.log('Refreshing data from GitHub...');
-            loadExcelData().then(() => {
-                // Show success notification
-                const notification = document.createElement('div');
-                notification.innerHTML = '✅ Data refreshed successfully!';
-                notification.style.cssText = `
-                    position: fixed;
-                    top: 20px;
-                    right: 20px;
-                    background: #28a745;
-                    color: white;
-                    padding: 15px 25px;
-                    border-radius: 25px;
-                    z-index: 1000;
-                    font-weight: bold;
-                    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-                `;
-                document.body.appendChild(notification);
-                
-                setTimeout(() => {
-                    if (document.body.contains(notification)) {
-                        document.body.removeChild(notification);
-                    }
-                }, 3000);
-            });
-        }
-
-        // Keyboard shortcuts
-        document.addEventListener('keydown', function(e) {
-            if (e.ctrlKey && e.key === 'r') {
-                e.preventDefault();
-                refreshData();
-            }
-        });
-
-        // Initialize dashboard
-        document.addEventListener('DOMContentLoaded', function() {
-            loadExcelData();
+            XLSX.utils.book_append_sheet(wb, ws, sheetData.name);
+            XLSX.writeFile(wb, `skincare_${sheetData.name}_${new Date().toISOString().split('T')[0]}.xlsx`);
             
-            // Load user preferences
-            const lastTab = localStorage.getItem('lastActiveTab');
-            if (lastTab && document.getElementById(lastTab)) {
-                showTab(lastTab);
-            }
-        });
+            showNotification('📥 Excel file exported successfully!', 'success');
+        }
 
-        // Auto-refresh every 5 minutes when hosted
-        setInterval(() => {
-            if (window.location.protocol !== 'file:') {
-                refreshData();
+        // Make all VBA tool functions global
+        window.processValueAbbreviation = processValueAbbreviation;
+        window.processBrandAbbreviation = processBrandAbbreviation;
+        window.clearValueInputs = clearValueInputs;
+        window.clearBrandInputs = clearBrandInputs;
+        window.copyValueResult = copyValueResult;
+        window.copyBrandResult = copyBrandResult;
+
+        // Setup VBA Tools Event Listeners
+        function setupVBAToolsEventListeners() {
+            setTimeout(() => {
+                const valueInput = document.getElementById('valueInput');
+                const brandInput = document.getElementById('brandInput');
+                const brandOwnerInput = document.getElementById('brandOwnerInput');
+                
+                if (valueInput) {
+                    valueInput.addEventListener('input', () => updateCharCounter('valueInput', 'valueInputCounter'));
+                }
+                if (brandInput) {
+                    brandInput.addEventListener('input', updateBrandCharCounter);
+                }
+                if (brandOwnerInput) {
+                    brandOwnerInput.addEventListener('input', updateBrandCharCounter);
+                }
+            }, 100);
+        }
+
+        // Character counter for inputs
+        function updateCharCounter(inputId, counterId) {
+            const input = document.getElementById(inputId);
+            const counter = document.getElementById(counterId);
+            const status = document.getElementById('valueInputStatus');
+            const length = input.value.length;
+            
+            if (counter) {
+                counter.innerHTML = `<span>${length} characters</span>`;
+                if (status) {
+                    if (length === 0) {
+                        status.textContent = 'Ready for processing';
+                        status.style.color = '#4ade80';
+                    } else if (length <= 100) {
+                        status.textContent = 'Optimal length';
+                        status.style.color = '#4ade80';
+                    } else if (length <= 200) {
+                        status.textContent = 'Good for processing';
+                        status.style.color = '#f59e0b';
+                    } else {
+                        status.textContent = 'Consider shorter text for best results';
+                        status.style.color = '#ef4444';
+                    }
+                }
             }
-        }, 300000);
+        }
+
+        function updateBrandCharCounter() {
+            const brandInput = document.getElementById('brandInput');
+            const ownerInput = document.getElementById('brandOwnerInput');
+            const brandCounter = document.getElementById('brandInputCounter');
+            const ownerCounter = document.getElementById('brandOwnerCounter');
+            
+            if (brandCounter) brandCounter.textContent = `${brandInput.value.length} characters`;
+            if (ownerCounter) ownerCounter.textContent = `${ownerInput.value.length} characters`;
+        }
+
+        // Value Abbreviation Algorithm
+        function processValueAbbreviation() {
+            const input = document.getElementById('valueInput').value.trim();
+            const resultDiv = document.getElementById('valueResult');
+            const counterDiv = document.getElementById('valueResultCounter');
+            const compressionDiv = document.getElementById('valueCompressionRatio');
+            
+            if (!input) {
+                showAnimatedMessage(resultDiv, '⚠️ Please enter text to process', '#f59e0b');
+                return;
+            }
+
+            showProcessingAnimation(resultDiv);
+            
+            setTimeout(() => {
+                try {
+                    const result = valueAbbreviateSentence(input);
+                    const originalLength = input.length;
+                    const resultLength = result.length;
+                    const compressionRatio = Math.round((1 - resultLength/originalLength) * 100);
+                    
+                    resultDiv.innerHTML = `<div style="padding: 20px; text-align: center; font-size: 1.1rem; font-weight: 500; color: #333;">${result}</div>`;
+                    counterDiv.innerHTML = `<span>${resultLength} characters</span>`;
+                    
+                    if (compressionDiv) {
+                        compressionDiv.innerHTML = `${compressionRatio}% compression achieved`;
+                        compressionDiv.style.color = resultLength <= 60 ? '#4ade80' : '#f59e0b';
+                    }
+                    
+                    resultDiv.style.animation = 'fadeIn 0.5s ease';
+                    
+                } catch (error) {
+                    showAnimatedMessage(resultDiv, '❌ Processing error occurred', '#ef4444');
+                }
+            }, 1500);
+        }
+
+        // Brand Abbreviation Algorithm
+        function processBrandAbbreviation() {
+            const brandInput = document.getElementById('brandInput').value.trim();
+            const ownerInput = document.getElementById('brandOwnerInput').value.trim();
+            const resultDiv = document.getElementById('brandResult');
+            const counterDiv = document.getElementById('brandResultCounter');
+            const statusDiv = document.getElementById('brandStatus');
+            
+            if (!brandInput || !ownerInput) {
+                showAnimatedMessage(resultDiv, '⚠️ Please enter both brand name and owner', '#f59e0b');
+                return;
+            }
+
+            showProcessingAnimation(resultDiv);
+            
+            setTimeout(() => {
+                try {
+                    const result = processBrandAndOwner(brandInput, ownerInput);
+                    const resultLength = result.length;
+                    
+                    resultDiv.innerHTML = `<div style="padding: 20px; text-align: center; font-size: 1.1rem; font-weight: 500; color: #333;">${result}</div>`;
+                    counterDiv.innerHTML = `<span>${resultLength} characters</span>`;
+                    
+                    if (statusDiv) {
+                        if (resultLength <= 40) {
+                            statusDiv.innerHTML = '✅ Within 40 character limit';
+                            statusDiv.style.color = '#4ade80';
+                        } else {
+                            statusDiv.innerHTML = '⚠️ Exceeds 40 character limit';
+                            statusDiv.style.color = '#f59e0b';
+                        }
+                    }
+                    
+                    resultDiv.style.animation = 'fadeIn 0.5s ease';
+                    
+                } catch (error) {
+                    showAnimatedMessage(resultDiv, '❌ Processing error occurred', '#ef4444');
+                }
+            }, 1200);
+        }
+
+        // Clear functions
+        function clearValueInputs() {
+            document.getElementById('valueInput').value = '';
+            document.getElementById('valueResult').innerHTML = `
+                <div style="text-align: center; color: #666;">
+                    <div style="font-size: 2rem; margin-bottom: 10px;">✨</div>
+                    <div>Processed result will appear here</div>
+                </div>
+            `;
+            updateCharCounter('valueInput', 'valueInputCounter');
+            document.getElementById('valueResultCounter').innerHTML = '<span>0 characters</span>';
+            document.getElementById('valueCompressionRatio').innerHTML = '';
+        }
+
+        function clearBrandInputs() {
+            document.getElementById('brandInput').value = '';
+            document.getElementById('brandOwnerInput').value = '';
+            document.getElementById('brandResult').innerHTML = `
+                <div style="text-align: center; color: #666;">
+                    <div style="font-size: 2rem; margin-bottom: 10px;">🎯</div>
+                    <div>Formatted brand name will appear here</div>
+                </div>
+            `;
+            updateBrandCharCounter();
+            document.getElementById('brandResultCounter').innerHTML = '<span>0 characters</span>';
+            document.getElementById('brandStatus').innerHTML = '';
+        }
+
+        // Copy functions
+        function copyValueResult() {
+            const resultDiv = document.getElementById('valueResult');
+            const text = resultDiv.textContent.trim();
+            if (text && text !== 'Processed result will appear here') {
+                navigator.clipboard.writeText(text).then(() => {
+                    showNotification('📋 Result copied to clipboard!', 'success');
+                });
+            }
+        }
+
+        function copyBrandResult() {
+            const resultDiv = document.getElementById('brandResult');
+            const text = resultDiv.textContent.trim();
+            if (text && text !== 'Formatted brand name will appear here') {
+                navigator.clipboard.writeText(text).then(() => {
+                    showNotification('📋 Result copied to clipboard!', 'success');
+                });
+            }
+        }
+
+        // Animation helpers
+        function showProcessingAnimation(element) {
+            element.innerHTML = `
+                <div style="display: flex; align-items: center; justify-content: center; height: 80px; gap: 15px;">
+                    <div class="loading-spinner" style="width: 30px; height: 30px; border-width: 3px;"></div>
+                    <span style="color: #666; font-weight: 500;">Processing...</span>
+                </div>
+            `;
+        }
+
+        function showAnimatedMessage(element, message, color) {
+            element.innerHTML = `
+                <div style="padding: 20px; text-align: center; color: ${color}; font-weight: 500;">
+                    ${message}
+                </div>
+            `;
+            element.style.animation = 'fadeIn 0.3s ease';
+        }
+
+        // Notification system
+        function showNotification(message, type) {
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                if (document.body.contains(notification)) {
+                    document.body.removeChild(notification);
+                }
+            }, 3000);
+        }
+
+        // Core abbreviation algorithms
+        function valueAbbreviateSentence(sentence) {
+            const vowels = "AEIOU";
+            const noiseWords = ["IT", "SO", "OR", "AN", "DO", "AT", "IF", "IS", "BY", "BE", "TO", "OF", "IN", "AS", "ON", "THE", "AND", "FOR", "ITS", "FROM", "THAT", "JUST", "THESE", "A"];
+            
+            sentence = sentence.replace(/\s+/g, ' ').trim();
+            let originalSentence = sentence;
+            sentence = sentence.toUpperCase();
+            
+            if (containsSpecialCharacters(sentence)) {
+                sentence = cleanSpecialCharacters(sentence);
+            }
+            
+            while (sentence.length > 60) {
+                sentence = removeNoiseWords(sentence, noiseWords);
+                if (sentence.length <= 60) break;
+                
+                let words = sentence.split(/\s+/);
+                let longWords = words.filter(word => word.length > 3);
+                
+                for (let i = longWords.length - 1; i >= 0; i--) {
+                    let word = longWords[i];
+                    if (word.length > 3) {
+                        let abbreviated = abbreviateWord(word, vowels);
+                        sentence = sentence.replace(new RegExp('\\b' + word + '\\b'), abbreviated);
+                        if (sentence.length <= 60) break;
+                    }
+                }
+                
+                if (sentence.length > 60) {
+                    sentence = shortenWords(sentence);
+                }
+                
+                if (sentence.length <= 60) break;
+            }
+            
+            return restoreCapitalization(sentence, originalSentence);
+        }
+
+        function processBrandAndOwner(brand, brandOwner) {
+            brand = brand.replace(/\n/g, '').trim();
+            brandOwner = brandOwner.replace(/\n/g, '').trim();
+            
+            let abbreviatedBrand = abbreviateSentence(brand);
+            let abbreviatedOwner = abbreviateSentence(brandOwner);
+            
+            return formatOutputs(abbreviatedBrand, abbreviatedOwner);
+        }
+
+        function abbreviateSentence(sentence) {
+            let result = sentence;
+            
+            const replacements = [
+                ['LIMITED LIABILITY COMPANY', 'LLC'],
+                ['LIMITED', 'LTD'],
+                ['INCORPORATION', 'INC'],
+                ['CORPORATION', 'CORP'],
+                ['PRIVATE LIMITED', 'PVT LTD'],
+                ['COMPANY', 'CO']
+            ];
+            
+            replacements.forEach(([search, replace]) => {
+                result = result.replace(new RegExp(search, 'gi'), replace);
+            });
+            
+            if (result.length <= 40) return result;
+            
+            let words = result.split(/\s+/);
+            for (let i = words.length - 1; i >= 0; i--) {
+                if (words[i].length > 3) {
+                    words[i] = abbreviateWord(words[i], "AEIOU");
+                    result = words.join(' ');
+                    if (result.length <= 40) break;
+                }
+            }
+            
+            return result;
+        }
+
+        function formatOutputs(output1, output2) {
+            output1 = output1.trim();
+            output2 = output2.trim().toUpperCase();
+            return `${output1} (${output2})`;
+        }
+
+        function abbreviateWord(word, vowels) {
+            let result = word;
+            let preserved = "";
+            
+            if (vowels.includes(result.charAt(0).toUpperCase())) {
+                if (vowels.includes(result.charAt(1).toUpperCase())) {
+                    preserved = result.substring(0, 2);
+                    result = result.substring(2);
+                } else {
+                    preserved = result.charAt(0);
+                    result = result.substring(1);
+                }
+            }
+            
+            result = result.replace(/(.)\1+/g, '$1');
+            result = result.replace(/[aeiouAEIOU]/g, '');
+            result = preserved + result;
+            
+            return result.length > 5 ? result.substring(0, 5) : result;
+        }
+
+        function removeNoiseWords(sentence, noiseWords) {
+            let words = sentence.split(/\s+/);
+            return words.filter(word => !noiseWords.includes(word.toUpperCase())).join(' ');
+        }
+
+        function containsSpecialCharacters(text) {
+            return /[^a-zA-Z0-9\s]/.test(text);
+        }
+
+        function cleanSpecialCharacters(text) {
+            return text.replace(/[^a-zA-Z0-9\s]/g, ' ').replace(/\s+/g, ' ').trim();
+        }
+
+        function shortenWords(sentence) {
+            let words = sentence.split(/\s+/);
+            for (let i = words.length - 1; i >= 0; i--) {
+                if (words[i].length > 3) {
+                    words[i] = words[i].substring(0, words[i].length - 1);
+                    let result = words.join(' ');
+                    if (result.length <= 60) return result;
+                }
+            }
+            return words.join(' ');
+        }
+
+        function restoreCapitalization(abbreviated, original) {
+            let abbWords = abbreviated.split(/\s+/);
+            let origWords = original.split(/\s+/);
+            
+            for (let i = 0; i < abbWords.length && i < origWords.length; i++) {
+                if (origWords[i] === origWords[i].toUpperCase()) {
+                    abbWords[i] = abbWords[i].toUpperCase();
+                } else if (origWords[i].charAt(0) === origWords[i].charAt(0).toUpperCase()) {
+                    abbWords[i] = abbWords[i].charAt(0).toUpperCase() + abbWords[i].substring(1).toLowerCase();
+                } else {
+                    abbWords[i] = abbWords[i].toLowerCase();
+                }
+            }
+            
+            return abbWords.join(' ');
+        }
+
+        function initializeWelcomeScreen() {
+            console.log('Dashboard initialized with VBA Tools available');
+        }
+
+        setTimeout(() => {
+            const valueInput = document.getElementById('valueInput');
+            if (valueInput) {
+                valueInput.addEventListener('input', function() {
+                    updateCharCounter('valueInput', 'valueInputCounter');
+                });
+                updateCharCounter('valueInput', 'valueInputCounter');
+            }
+
+            const brandInput = document.getElementById('brandInput');
+            const brandOwnerInput = document.getElementById('brandOwnerInput');
+            
+            if (brandInput) {
+                brandInput.addEventListener('input', function() {
+                    updateBrandCharCounter();
+                });
+            }
+            
+            if (brandOwnerInput) {
+                brandOwnerInput.addEventListener('input', function() {
+                    updateBrandCharCounter();
+                });
+            }
+            
+            updateBrandCharCounter();
+        }, 2000);
+
+        const originalShowTab = window.showTab;
+        window.showTab = function(tabName) {
+            originalShowTab(tabName);
+            
+            if (tabName === 'vba-tools') {
+                setTimeout(() => {
+                    updateBrandCharCounter();
+                    updateCharCounter('valueInput', 'valueInputCounter');
+                }, 100);
+            }
+        };
     </script>
 </body>
 </html>
